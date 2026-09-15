@@ -1,5 +1,5 @@
 body {background-color: #27B64B;}
 font-family: Times New Roman;
-h1   {font-style: italic; font-weight: 200;}
-h2   {text-transform: uppercase; font-size: 20px; font-weight: 200;}
+h1   {font-style: italic; font-weight: 200 !important;}
+h2   {text-transform: uppercase; font-size: 20px; font-weight: 200 !important;}
 p    {font-size: 18px; width: 300px;}
