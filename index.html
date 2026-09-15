@@ -17,6 +17,21 @@ p    {color: red;}
     <h2>by [Name]</h2>
     <p>“Lorem ipsum [noun],” [username] dorit,</p>
     
+<script>
+const channel = new BroadcastChannel("my-editor-channel");
+const link = document.getElementById("myLink");
+
+// Remember the original link text
+const originalText = link.textContent;
+
+channel.addEventListener("message", (event) => {
+  const text = event.data.text;
+
+  // Replace "Original" with whatever is typed
+  link.textContent = originalText.replace("Original", text);
+});
+</script>
+
   </body>
 </html>
 
