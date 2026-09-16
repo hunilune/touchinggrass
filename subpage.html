@@ -1,0 +1,31 @@
+<div>Username: <span id="username" contenteditable="true">US</span></div>
+<div>Noun: <span id="noun" contenteditable="true">grass</span></div>
+<div>Verb: <span id="verb" contenteditable="true">growing</span></div>
+<div>Adverb: <span id="adverb" contenteditable="true">slowly</span></div>
+<div>Adjective: <span id="adjective" contenteditable="true">green</span></div>
+<div>Pronoun: <span id="pronoun" contenteditable="true">it</span></div>
+
+<script>
+const channel = new BroadcastChannel("my-editor-channel");
+const fields = ["username", "noun", "verb", "adverb", "adjective", "pronoun"];
+
+function broadcastAll() {
+  const data = {};
+  fields.forEach(id => {
+    data[id] = document.getElementById(id).innerText;
+  });
+  channel.postMessage(data);
+}
+
+fields.forEach(id => {
+  document.getElementById(id).addEventListener("input", broadcastAll);
+});
+
+// Respond to Page B's sync request
+channel.addEventListener("message", (event) => {
+  if (event.data.request === "sync") broadcastAll();
+});
+
+// Initial send
+broadcastAll();
+</script>
