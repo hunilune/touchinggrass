@@ -2,3 +2,10 @@ body {background-color: #27B64B; font-family: Times New Roman; margin: 4rem;}
 h1   {font-style: italic; font-weight: 200 !important;}
 h2   {text-transform: uppercase; font-size: 20px; font-weight: 200 !important;}
 p    {font-size: 18px; width: 300px;}
+
+.fill.erasable:hover {
+  text-decoration: underline dotted;
+}
+.fill.erased {
+  display: none;
+}
