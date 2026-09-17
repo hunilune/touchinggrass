@@ -1,0 +1,23 @@
+body {background-color: #c7dfcd; font-family: Times New Roman; margin: 4rem;}
+h1 {font-size: 24px;}
+h2   {font-size: 22px;}
+label {display: block; margin-top: 12px;}
+span {
+  display: block;
+  border: 1px solid #424141;
+  padding: 6px;
+  margin-top: 4px;
+  min-height: 20px;
+  max-width: 500px;
+}
+button {
+  margin-top: 14px;
+  padding: 8px 16px;
+  color: #e7e1e1;
+  background-color: #424141;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: #232323;
+}

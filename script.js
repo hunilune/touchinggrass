@@ -1,5 +1,3 @@
-const channel = new BroadcastChannel("my-editor-channel");
-
 // Store original bracket/paren placeholder text so we can restore it
 const fillSpans = document.querySelectorAll(".fill");
 fillSpans.forEach(span => {
@@ -27,13 +25,11 @@ function applyValue(key, value) {
   });
 }
 
-channel.addEventListener("message", (event) => {
-  const data = event.data;
-  if (data.request === "ack") return; // ignore internal acks, see below
+function applySavedProfile() {
+  const data = JSON.parse(localStorage.getItem("profileData") || "{}");
   Object.entries(data).forEach(([key, value]) => {
     applyValue(key, value);
   });
-});
+}
 
-// Ask Page A to resend current values on load (fixes race condition)
-channel.postMessage({ request: "sync" });
+applySavedProfile();
