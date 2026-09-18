@@ -1,31 +1,57 @@
-<div>Username: <span id="username" contenteditable="true">US</span></div>
-<div>Noun: <span id="noun" contenteditable="true">grass</span></div>
-<div>Verb: <span id="verb" contenteditable="true">growing</span></div>
-<div>Adverb: <span id="adverb" contenteditable="true">slowly</span></div>
-<div>Adjective: <span id="adjective" contenteditable="true">green</span></div>
-<div>Pronoun: <span id="pronoun" contenteditable="true">it</span></div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="profile.css">
+    <title>profile setup</title>
+  </head>
+
+  <body>
+    <h1>create a shared identity</h1>
+    <h2>it's quick and easy!</h2>
+
+    <form id="profile">
+      <label>your name</label>
+      <span id="username" contenteditable="true">US</span>
+      
+      <label>what was the name of your first stuffed toy?</label>
+      <span id="noun" contenteditable="true">grass</span>
+
+      <label>what did you do during school breaks?</label>
+      <span id="verb" contenteditable="true">grow</span>
+
+      <label>how do you spend your free time?</label>
+      <span id="adverb" contenteditable="true">slowly</span>
+
+      <label>how does your online self describe your real self?</label>
+      <span id="adjective" contenteditable="true">green</span>
+
+      <label>who?</label>
+      <span id="pronoun" contenteditable="true">it</span>
+
+      <button id="register" type="submit">Register</button>
+      <button id="view-profile" type="button" style="display: none;">View profile</button>
+    </form>
 
 <script>
-const channel = new BroadcastChannel("my-editor-channel");
 const fields = ["username", "noun", "verb", "adverb", "adjective", "pronoun"];
 
-function broadcastAll() {
+function saveProfileData() {
   const data = {};
   fields.forEach(id => {
     data[id] = document.getElementById(id).innerText;
   });
-  channel.postMessage(data);
+  localStorage.setItem("profileData", JSON.stringify(data));
 }
 
-fields.forEach(id => {
-  document.getElementById(id).addEventListener("input", broadcastAll);
+document.getElementById("profile").addEventListener("submit", (e) => {
+  e.preventDefault();
+  saveProfileData();
+  document.getElementById("view-profile").style.display = "inline-block";
 });
 
-// Respond to Page B's sync request
-channel.addEventListener("message", (event) => {
-  if (event.data.request === "sync") broadcastAll();
+document.getElementById("view-profile").addEventListener("click", () => {
+  window.location.href = "index.html";
 });
-
-// Initial send
-broadcastAll();
 </script>
